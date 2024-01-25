@@ -1,0 +1,35 @@
+<label for="location-search">Search for a new place</label>
+<input id="location-search" #search placeholder="Ex: Chicago, IL, Acme, or *" />
+<button
+  type="button"
+  (click)="
+    searchHousingLocations(
+      search.value,
+      wifi.checked,
+      laundry.checked,
+      units.checked
+    )
+  "
+>
+  Search
+</button>
+<div id="checkboxes">
+  Filter by:
+  <label for="wifi-checkbox">Wifi</label>
+  <input id="wifi-checkbox" type="checkbox" #wifi />
+  <label for="laundry-checkbox">Laundry</label>
+  <input id="laundry-checkbox" type="checkbox" #laundry />
+  <label for="units-checkbox">Avail</label>
+  <input id="units-checkbox" type="checkbox" #units [defaultChecked]="true" />
+</div>
+<section id="articles">
+  <p *ngIf="results.length === 0">0 places found.</p>
+  <article *ngFor="let location of results">
+    <img [src]="location.photo" alt="location.name" />
+    <p>{{ location.name }}</p>
+    <p>{{ location.city }}, {{ location.state }}</p>
+    <button type="button" (click)="selectHousingLocation(location)">
+      View
+    </button>
+  </article>
+</section>
